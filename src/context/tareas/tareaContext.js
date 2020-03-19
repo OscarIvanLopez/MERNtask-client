@@ -1,7 +1,7 @@
 import { createContext} from 'react';
 
-const TareaContext = createContext();
+const tareaContext = createContext();
 
 
 
-export default TareaContext;
+export default tareaContext;
