@@ -1,6 +1,6 @@
-import React, {useReducer} from 'react';
+import React, { useReducer } from 'react';
 
-import uuidv1 from 'uuid/v1';
+import uuid from 'uuid/v1';
 
 import proyectoContext from './proyectoContext';
 import projectoReducer from "./proyectoReducer";
@@ -16,10 +16,10 @@ import {
 
 const ProyectoState = props => {
     const proyectos = [
-        {id: 1, nombre: 'Tienda Virtual'},
-        {id: 2, nombre: 'Intranet'},
-        {id: 3, nombre: 'Diseño de Sitio web'},
-        {id: 4, nombre: 'MERN'}
+        { id: 1, nombre: 'Tienda Virtual' },
+        { id: 2, nombre: 'Intranet' },
+        { id: 3, nombre: 'Diseño de Sitio web' },
+        { id: 4, nombre: 'MERN' }
     ];
     const initialState = {
         proyectos: [],
@@ -28,17 +28,17 @@ const ProyectoState = props => {
         proyecto: null
     };
 
-    // Dispatch para ejecutar las acciones
+    //* Dispatch para ejecutar las acciones
     const [state, dispatch] = useReducer(projectoReducer, initialState);
 
-    //Serie de funciones para el CRUD
+    //*Serie de funciones para el CRUD
     const mostrarFormulario = () => {
         dispatch({
             type: FORMULARIO_PROYECTO
         })
     };
 
-    // Obtener los proyectos con DISPATCH
+    //* Obtener los proyectos con DISPATCH
     const obtenerProyectos = () => {
         dispatch({
             type: OBTENER_PROYECTOS,
@@ -46,11 +46,11 @@ const ProyectoState = props => {
         })
     };
 
-    //Agregar nuevo proyecto
+    //*Agregar nuevo proyecto
     const agregarProyecto = proyecto => {
-        proyecto.id = uuidv1.v4();
+        proyecto.id = uuid();
 
-        //  Insertar el proyecto en el state
+        //*  Insertar el proyecto en el state
 
         dispatch({
             type: AGREGAR_PROYECTO,
@@ -58,14 +58,14 @@ const ProyectoState = props => {
         })
     };
 
-    // Validar el formulario por errores
+    //* Validar el formulario por errores
     const mostrarError = () => {
         dispatch({
             type: VALIDAR_FORMULARIO
         })
     };
 
-    //Seleccionar el Proyecto que el usuario dio click
+    //*Seleccionar el Proyecto que el usuario dio click
     const proyectoActual = (proyectoId) => {
         dispatch({
             type: PROYECTO_ACTUAL,
@@ -73,13 +73,15 @@ const ProyectoState = props => {
         })
     };
 
-    //Elimina un proyecto
-    const eliminarProyecto = proyectoId =>{
+    //*Elimina un proyecto
+    const eliminarProyecto = proyectoId => {
         dispatch({
             type: ELIMINAR_PROYECTO,
             payload: proyectoId
         })
     };
+
+
 
 
     return (
@@ -95,6 +97,7 @@ const ProyectoState = props => {
                 mostrarError,
                 proyectoActual,
                 eliminarProyecto
+
             }}
         >
             {props.children}

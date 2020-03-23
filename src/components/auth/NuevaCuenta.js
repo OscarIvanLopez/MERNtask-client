@@ -12,7 +12,7 @@ const NuevaCuenta = () => {
         confirmar: ''
     });
 
-    // extraer de usuario
+    // extraer  usuario
     const {nombre, email, password, confirmar} = usuario;
 
     const onChange = (e) => {
