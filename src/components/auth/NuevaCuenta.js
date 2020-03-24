@@ -1,10 +1,15 @@
-/* eslint-disable no-console */
-
-import React, {useState} from 'react';
-import {Link} from 'react-router-dom'
+import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom'
+import AlertaContext from '../../context/alertas/alertaContext'
 
 const NuevaCuenta = () => {
-    //State para iniciar sesion
+
+    //* Extraer los valores del context
+    const alertaContext = useContext(AlertaContext);
+    const { alerta, mostrarAlerta } = alertaContext;
+
+
+    //*State para iniciar sesion
     const [usuario, guardarUsuario] = useState({
         nombre: '',
         email: '',
@@ -12,8 +17,8 @@ const NuevaCuenta = () => {
         confirmar: ''
     });
 
-    // extraer  usuario
-    const {nombre, email, password, confirmar} = usuario;
+    //* extraer  usuario
+    const { nombre, email, password, confirmar } = usuario;
 
     const onChange = (e) => {
         guardarUsuario({
@@ -22,31 +27,45 @@ const NuevaCuenta = () => {
         })
     }
 
-    //cuando el usuario quiera iniciar sesion
+    //*cuando el usuario quiera iniciar sesion
     const onSubmit = e => {
         e.preventDefault();
 
-        //validar que no haya campos vacios
-
-        //Password minimo de 6 caracteres
-
-        //Los dos password sean iguales
-        //pasarlo al action
+        //*validar que no haya campos vacios
+        if (nombre.trim() === '' ||
+            email.trim() === '' ||
+            password.trim() === '' ||
+            confirmar.trim() === '') {
+            mostrarAlerta('Todos los campos son obligatorios', 'alerta-error');
+            return;
+        }
+        //*Password minimo de 6 caracteres
+        if (password.length < 6){
+            mostrarAlerta('El password debe ser de al menos 6 caracteres', 'alerta-error');
+            return;
+        } 
+        //*Los dos password sean iguales
+        if (password !== confirmar){
+            mostrarAlerta('Los passwords no son iguales', 'alerta-error');
+            return;
+        } 
+        //*pasarlo al action
+        
     };
 
     return (
         <div className="form-usuario">
+            {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
             <div className="contenedor-form sombra-dark">
-                <h1>Obtener Nueva Cuenta</h1>
+                <h1>Obtener una cuenta</h1>
 
                 <form
                     onSubmit={onSubmit}
                 >
                     <div className="campo-form">
-
                         <label htmlFor="nombre">Nombre</label>
                         <input
-                            type="nombre"
+                            type="text"
                             id="nombre"
                             name="nombre"
                             placeholder="Tu Nombre"
@@ -54,8 +73,8 @@ const NuevaCuenta = () => {
                             onChange={onChange}
                         />
                     </div>
-                    <div className="campo-form">
 
+                    <div className="campo-form">
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"
@@ -68,8 +87,7 @@ const NuevaCuenta = () => {
                     </div>
 
                     <div className="campo-form">
-
-                        <label htmlFor="email">Password</label>
+                        <label htmlFor="password">Password</label>
                         <input
                             type="password"
                             id="password"
@@ -81,8 +99,6 @@ const NuevaCuenta = () => {
                     </div>
 
                     <div className="campo-form">
-
-                        {/* TE QUEDASTE EN EL INPUT DE CONFIRMACION DE CONTRASEÑA  MINUTO 1:40*/}
                         <label htmlFor="confirmar">Confirmar Password</label>
                         <input
                             type="password"
@@ -95,14 +111,12 @@ const NuevaCuenta = () => {
                     </div>
 
                     <div className="campo-form">
-                        <input type="submit" className="btn btn-primario btn-block" value="Registrar"/>
+                        <input type="submit" className="btn btn-primario btn-block" value="Registrarme" />
                     </div>
-
-
                 </form>
 
                 <Link to={'/'} className="enlace-cuenta">
-                    Volver a iniciar Sesión
+                    Volver a Iniciar Sesión
                 </Link>
             </div>
         </div>
