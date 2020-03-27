@@ -1,8 +1,30 @@
 /* eslint-disable no-console */
-import React, {useState} from 'react';
-import {Link} from 'react-router-dom'
+import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import AlertaContext from '../../context/alertas/alertaContext';
+import AuthContext from '../../context/autenticacion/authContext';
 
-const Login = () => {
+const Login = (props) => {
+
+    //* Extraer los valores del context
+    const alertaContext = useContext(AlertaContext);
+    const { alerta, mostrarAlerta } = alertaContext;
+
+    //* Extraer los valores y funciones de AuthContext
+    const authContext = useContext(AuthContext);
+    const { mensaje, autenticado, iniciarSesion } = authContext;
+    //* En caso de que el password o usuario no exista
+    useEffect(() => {
+        if (autenticado) {
+            props.history.push('/proyectos');
+        }
+
+        if (mensaje) {
+            mostrarAlerta(mensaje.msg, mensaje.categoria);
+        }
+        // eslint-disable-next-line
+    }, [mensaje, autenticado, props.history])
+
     //State para iniciar sesion
     const [usuario, guardarUsuario] = useState({
         email: '',
@@ -10,26 +32,30 @@ const Login = () => {
     });
 
     // extraer de usuario
-    const {email, password} = usuario;
+    const { email, password } = usuario;
 
     const onChange = (e) => {
         guardarUsuario({
             ...usuario,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
     //cuando el usuario quiera iniciar sesion
-    const onSubmit = e =>{
+    const onSubmit = e => {
         e.preventDefault();
 
         //validar que no haya campos vacios
-
+        if (email.trim() === '' || password.trim() === '') {
+            mostrarAlerta('Todos los campos son obligatorios', 'alerta-error');
+        }
         //pasarlo al action
+        iniciarSesion({ email, password });
     }
 
     return (
         <div className="form-usuario">
+            {alerta ? (<div className={`alerta ${alerta.categoria}`}> {alerta.msg} </div>) : null}
             <div className="contenedor-form sombra-dark">
                 <h1>Iniciar Sesion</h1>
 
@@ -63,7 +89,7 @@ const Login = () => {
                     </div>
 
                     <div className="campo-form">
-                        <input type="submit" className="btn btn-primario btn-block" value="Iniciar "/>
+                        <input type="submit" className="btn btn-primario btn-block" value="Iniciar " />
                     </div>
                 </form>
 
