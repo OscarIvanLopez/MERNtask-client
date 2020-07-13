@@ -103,6 +103,7 @@ a {
   }
   .seccion-principal {
       flex: 1;
+      background-color: white;
   }
 
 }
