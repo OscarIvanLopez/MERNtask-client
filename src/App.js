@@ -26,7 +26,7 @@ function App() {
                     <AuthState>
                         <Router>
                             <Switch>
-                                <Route exact path="/" component={Login} />
+                                <Route exact path="https://oscarivanlopez.github.io/MERNtask-client/" component={Login} />
                                 <Route exact path="/nueva-cuenta" component={NuevaCuenta} />
                                 <RutaPrivada exact path="/proyectos" component={Proyectos} />
                             </Switch>
