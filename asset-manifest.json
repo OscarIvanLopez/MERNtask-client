@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/MERNTask-client%20/static/css/main.0b2a153e.chunk.css",
+    "main.js": "/MERNTask-client%20/static/js/main.467c9fbd.chunk.js",
+    "main.js.map": "/MERNTask-client%20/static/js/main.467c9fbd.chunk.js.map",
+    "runtime-main.js": "/MERNTask-client%20/static/js/runtime-main.83de6571.js",
+    "runtime-main.js.map": "/MERNTask-client%20/static/js/runtime-main.83de6571.js.map",
+    "static/js/2.75542202.chunk.js": "/MERNTask-client%20/static/js/2.75542202.chunk.js",
+    "static/js/2.75542202.chunk.js.map": "/MERNTask-client%20/static/js/2.75542202.chunk.js.map",
+    "index.html": "/MERNTask-client%20/index.html",
+    "precache-manifest.3057d3240c132a7ddaf248100aabc903.js": "/MERNTask-client%20/precache-manifest.3057d3240c132a7ddaf248100aabc903.js",
+    "service-worker.js": "/MERNTask-client%20/service-worker.js",
+    "static/css/main.0b2a153e.chunk.css.map": "/MERNTask-client%20/static/css/main.0b2a153e.chunk.css.map",
+    "static/js/2.75542202.chunk.js.LICENSE.txt": "/MERNTask-client%20/static/js/2.75542202.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.83de6571.js",
+    "static/js/2.75542202.chunk.js",
+    "static/css/main.0b2a153e.chunk.css",
+    "static/js/main.467c9fbd.chunk.js"
+  ]
+}
